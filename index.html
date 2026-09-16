@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For Athi 🤍</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* =========================
+           BASIC
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0d0c0c;
+            color: #f4eeee;
+            font-family: "Noto Sans Tamil", sans-serif;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: #d7a9b2;
+            color: #111;
+        }
+
+        /* =========================
+           SMALL DECORATION
+        ========================= */
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.035;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+        }
+
+        .small-line {
+            width: 45px;
+            height: 1px;
+            background: #c99da6;
+            margin: 20px auto;
+            opacity: 0.7;
+        }
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .intro {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: #0d0c0c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .intro.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .intro-content {
+            padding: 30px;
+        }
+
+        .intro-small {
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #a99799;
+            margin-bottom: 28px;
+        }
+
+        .intro h1 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(70px, 14vw, 150px);
+            font-weight: 500;
+            letter-spacing: 4px;
+            line-height: 0.8;
+            color: #f4eeee;
+        }
+
+        .intro-sub {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #a9a0a1;
+        }
+
+        .enter-btn {
+            margin-top: 38px;
+            border: 1px solid rgba(220, 190, 195, 0.35);
+            background: transparent;
+            color: #eee5e6;
+            padding: 13px 28px;
+            border-radius: 30px;
+            font-family: "Noto Sans Tamil", sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .enter-btn:hover {
+            background: #eee5e6;
+            color: #171313;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        main.show {
+            opacity: 1;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 90px 25px;
+        }
+
+        .container {
+            width: min(900px, 100%);
+            text-align: center;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: rgba(164, 111, 121, 0.07);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-top {
+            font-family: "Poppins", sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #9d9294;
+            margin-bottom: 25px;
+        }
+
+        .hero h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(65px, 12vw, 125px);
+            font-weight: 500;
+            line-height: 0.9;
+            letter-spacing: 3px;
+        }
+
+        .hero h2 span {
+            color: #c99da6;
+        }
+
+        .hero-text {
+            max-width: 540px;
+            margin: 35px auto 0;
+            color: #aaa2a3;
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        .scroll-text {
+            margin-top: 70px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #756d6e;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           POEM
+        ========================= */
+
+        .poem-section {
+            background: #111010;
+        }
+
+        .section-label {
+            font-family: "Poppins", sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #8e7d80;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .poem-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(35px, 6vw, 60px);
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+
+        .poem {
+            font-size: 17px;
+            line-height: 2.4;
+            color: #d3cccd;
+            font-weight: 300;
+        }
+
+        .poem .highlight {
+            color: #d5aab2;
+        }
+
+        /* =========================
+           LETTER
+        ========================= */
+
+        .letter {
+            max-width: 680px;
+            margin: auto;
+            text-align: left;
+        }
+
+        .letter p {
+            font-size: 16px;
+            line-height: 2.2;
+            color: #c3bbbc;
+            margin-bottom: 22px;
+        }
+
+        .letter .opening {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 38px;
+            color: #eee6e7;
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 28px;
+            color: #d2a7af;
+        }
+
+        /* =========================
+           HEART
+        ========================= */
+
+        .heart-section {
+            min-height: 80vh;
+        }
+
+        .heart {
+            width: 75px;
+            height: 75px;
+            margin: 30px auto;
+            position: relative;
+            cursor: pointer;
+            transform: rotate(-45deg);
+            border-left: 2px solid #bd929b;
+            border-bottom: 2px solid #bd929b;
+            transition: 0.5s;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            border: 2px solid #bd929b;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -39px;
+            left: -2px;
+            border-bottom: none;
+        }
+
+        .heart::after {
+            left: 37px;
+            top: 1px;
+            border-left: none;
+        }
+
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.08);
+        }
+
+        .hidden-message {
+            max-width: 600px;
+            margin: 35px auto 0;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: 0.8s;
+            color: #cfc5c7;
+            line-height: 2;
+            pointer-events: none;
+        }
+
+        .hidden-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           FINAL
+        ========================= */
+
+        .final {
+            min-height: 90vh;
+            text-align: center;
+        }
+
+        .final-small {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #93898b;
+            margin-bottom: 25px;
+        }
+
+        .final h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(48px, 9vw, 90px);
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .final h2 span {
+            color: #c99da6;
+        }
+
+        .final p {
+            margin-top: 30px;
+            color: #a69d9e;
+            line-height: 2;
+            font-size: 15px;
+        }
+
+        .final-date {
+            margin-top: 45px;
+            font-family: "Poppins", sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #766e70;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #514c4d;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* =========================
+           REVEAL ANIMATION
+        ========================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 70px 22px;
+            }
+
+            .hero-text {
+                font-size: 14px;
+            }
+
+            .poem {
+                font-size: 15px;
+                line-height: 2.2;
+            }
+
+            .letter p {
+                font-size: 14px;
+                line-height: 2;
+            }
+
+            .letter .opening {
+                font-size: 31px;
+            }
+
+            .signature {
+                font-size: 25px;
+            }
+
+            .scroll-text {
+                margin-top: 55px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Subtle texture -->
+    <div class="grain"></div>
+
+
+    <!-- =========================
+         INTRO SCREEN
+    ========================= -->
+
+    <div class="intro" id="intro">
+
+        <div class="intro-content">
+
+            <div class="intro-small">
+                A little something for you
+            </div>
+
+            <h1>Athi</h1>
+
+            <div class="small-line"></div>
+
+            <div class="intro-sub">
+                உனக்காக மட்டும்...
+            </div>
+
+            <button class="enter-btn" onclick="openWebsite()">
+                உள்ளே வா 🤍
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         MAIN WEBSITE
+    ========================= -->
+
+    <main id="main">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="container reveal">
+
+                <div class="hero-top">
+                    September 16 · A special day
+                </div>
+
+                <h2>
+                    Happy Birthday<br>
+                    <span>Athi</span>
+                </h2>
+
+                <div class="small-line"></div>
+
+                <p class="hero-text">
+                    சில மனிதர்கள் வாழ்க்கையில் வருவது ஒரு சம்பவம்...
+                    <br>
+                    ஆனால் அவர்கள் நம்ம வாழ்க்கையில் விட்டுச் செல்லும்
+                    நினைவுகள் மட்டும் எப்போதும் அழகானது.
+                </p>
+
+                <div class="scroll-text">
+                    ↓ &nbsp; கொஞ்சம் கீழே வா
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- POEM -->
+
+        <section class="poem-section">
+
+            <div class="container reveal">
+
+                <div class="section-label">
+                    ஒரு சிறிய கவிதை
+                </div>
+
+                <h2 class="poem-title">
+                    உனக்காக...
+                </h2>
+
+                <div class="small-line"></div>
+
+                <div class="poem">
+
+                    <p>
+                        எல்லாருக்கும் பிறந்த நாள் வரும்...
+                        <br>
+                        ஆனால் சிலருடைய பிறந்த நாள் மட்டும்
+                        <br>
+                        <span class="highlight">மனசுக்கு கொஞ்சம் அதிகமான சந்தோஷத்தை</span>
+                        கொண்டு வரும்.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        அப்படியொரு நாள்தான் இன்று...
+                        <br>
+                        ஏனென்றால்,
+                        <br>
+                        இன்று பிறந்தது
+                        <br>
+                        <span class="highlight">எனக்கு பிடித்த ஒருத்தர்.</span>
+                    </p>
+
+                    <br>
+
+                    <p>
+                        உன் சிரிப்பு எப்போதும் குறையாமல் இருக்கட்டும்,
+                        <br>
+                        உன் கனவுகள் எல்லாம் நிஜமாகட்டும்,
+                        <br>
+                        நீ செல்லும் ஒவ்வொரு பாதையிலும்
+                        <br>
+                        சந்தோஷம் மட்டும் உன்னைத் தேடி வரட்டும்.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        வாழ்க்கை எவ்வளவு மாறினாலும்...
+                        <br>
+                        இன்று போலவே
+                        <br>
+                        <span class="highlight">நீ எப்போதும் சந்தோஷமாக இருக்கணும்.</span>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LETTER -->
+
+        <section>
+
+            <div class="container reveal">
+
+                <div class="section-label">
+                    சொல்ல நினைத்தது
+                </div>
+
+                <div class="small-line"></div>
+
+                <div class="letter">
+
+                    <p class="opening">
+                        Athi...
+                    </p>
+
+                    <p>
+                        உனக்கு birthday wish பண்ணணும்னு
+                        ஒரு சாதாரண “Happy Birthday” சொல்லிட்டு
+                        போயிடலாம்.
+                    </p>
+
+                    <p>
+                        ஆனா சில பேருக்கு
+                        ஒரு சாதாரண wish போதாது.
+                    </p>
+
+                    <p>
+                        ஏனென்றால் அவர்கள்
+                        நம்ம வாழ்க்கையில் சாதாரணமானவர்கள் இல்லை.
+                    </p>
+
+                    <p>
+                        நீ எப்போதும் சந்தோஷமா இருக்கணும்.
+                        உனக்கு பிடிச்ச விஷயங்கள் எல்லாம்
+                        உன்னைத் தேடி வரணும்.
+                        நீ நினைக்கிறதை விட
+                        இன்னும் அழகான வாழ்க்கை
+                        உனக்கு கிடைக்கணும்.
+                    </p>
+
+                    <p>
+                        உன்னோட வாழ்க்கையில்
+                        இன்னும் நிறைய நல்ல நாட்கள் வரட்டும்.
+                        நிறைய சிரிப்புகள்,
+                        நிறைய அழகான நினைவுகள்,
+                        மறக்க முடியாத தருணங்கள்...
+                        எல்லாமே உனக்காக காத்திருக்கட்டும்.
+                    </p>
+
+                    <p>
+                        இந்த website-ஐ பார்த்துட்டு
+                        நீ ஒரு நிமிஷம் சிரிச்சிருந்தா...
+                        அதுவே எனக்கு இந்த whole thing-க்கு
+                        கிடைத்த பெரிய gift.
+                    </p>
+
+                    <div class="signature">
+                        — உனக்காக 🤍
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- INTERACTIVE -->
+
+        <section class="heart-section">
+
+            <div class="container reveal">
+
+                <div class="section-label">
+                    ஒரு சின்ன secret
+                </div>
+
+                <h2 class="poem-title">
+                    இதை touch பண்ணு
+                </h2>
+
+                <div class="small-line"></div>
+
+                <div class="heart" id="heart" onclick="showSecret()"></div>
+
+                <div class="hidden-message" id="secret">
+
+                    <p>
+                        சில விஷயங்களை வார்த்தைகளால் சொல்ல முடியாது...
+                    </p>
+
+                    <br>
+
+                    <p>
+                        அதனால்தான்,
+                        இந்த முழு website-ஐயும்
+                        ஒரு சின்ன wish-ஆ மாற்றி
+                        உனக்காக வைத்திருக்கேன்.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Athi,</strong>
+                        நீ எப்போதும் இப்படியே
+                        அழகான மனசோட,
+                        சந்தோஷமா இருக்கணும். 🤍
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FINAL -->
+
+        <section class="final">
+
+            <div class="container reveal">
+
+                <div class="final-small">
+                    And finally...
+                </div>
+
+                <h2>
+                    Happy Birthday<br>
+                    <span>Athi</span> 🤍
+                </h2>
+
+                <div class="small-line"></div>
+
+                <p>
+                    இன்று உன்னுடைய நாள்.
+                    <br>
+                    இந்த நாள் மட்டும் இல்ல...
+                    <br>
+                    வரப்போகும் ஒவ்வொரு நாளும்
+                    உனக்கு அழகாக இருக்கட்டும்.
+                </p>
+
+                <div class="final-date">
+                    With a little love · 2026
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            Made specially for Athi
+        </footer>
+
+    </main>
+
+
+
+    <script>
+
+        /* =========================
+           OPEN WEBSITE
+        ========================= */
+
+        function openWebsite() {
+
+            const intro = document.getElementById("intro");
+            const main = document.getElementById("main");
+
+            intro.classList.add("hide");
+
+            setTimeout(() => {
+                main.classList.add("show");
+            }, 500);
+
+        }
+
+
+        /* =========================
+           SECRET MESSAGE
+        ========================= */
+
+        function showSecret() {
+
+            const message = document.getElementById("secret");
+            const heart = document.getElementById("heart");
+
+            message.classList.toggle("show");
+
+            if (message.classList.contains("show")) {
+
+                heart.style.transform =
+                    "rotate(-45deg) scale(1.15)";
+
+            } else {
+
+                heart.style.transform =
+                    "rotate(-45deg) scale(1)";
+
+            }
+
+        }
+
+
+        /* =========================
+           SCROLL REVEAL
+        ========================= */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            reveals.forEach(element => {
+
+                const windowHeight =
+                    window.innerHeight;
+
+                const elementTop =
+                    element.getBoundingClientRect().top;
+
+                const visiblePoint = 100;
+
+                if (elementTop <
+                    windowHeight - visiblePoint) {
+
+                    element.classList.add("active");
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener(
+            "scroll",
+            revealOnScroll
+        );
+
+
+        /* Initial reveal */
+
+        setTimeout(() => {
+
+            revealOnScroll();
+
+        }, 700);
+
+    </script>
+
+</body>
+</html>
